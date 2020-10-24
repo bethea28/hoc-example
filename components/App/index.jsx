@@ -24,6 +24,14 @@ function ShowEmployeeBasicDetails(props) {
     </div>
   )
 }
+function ChildrenRender(props) {
+  console.log('children', props)
+  return (
+    <div>
+      <div>Children:{props.children} </div>
+    </div>
+  )
+}
 
 function RandomArticlesDetails(props) {
   console.log('random articles', props.data[0]?.title)
@@ -60,9 +68,7 @@ var HigherOrderComponent = (WrappedComponent) => {
     }
 
     async componentDidMount() {
-      let articles = await axios.get(
-        `https://jsonmock.hackerrank.com/api/articles?page=${this.state.index}`
-      )
+      let articles = await axios(`https://jsonmock.hackerrank.com/api/articles`)
       console.log('articles', articles.data.data)
       this.setState({
         data: articles.data.data,
@@ -73,7 +79,9 @@ var HigherOrderComponent = (WrappedComponent) => {
     render() {
       return (
         <div>
-          <WrappedComponent {...this.state}></WrappedComponent>
+          <WrappedComponent {...this.state}>
+            children of the wrapped component
+          </WrappedComponent>
         </div>
       )
     }
@@ -87,6 +95,8 @@ var EmployeeSalaryDetails = HigherOrderComponent(ShowEmployeeSalaryDetails)
 
 var RandomArticles = HigherOrderComponent(RandomArticlesDetails)
 
+var Children = HigherOrderComponent(ChildrenRender)
+
 ReactDOM.render(
   <div>
     <h2>Employee Basic Details Component:</h2>
@@ -96,6 +106,8 @@ ReactDOM.render(
     <EmployeeSalaryDetails />
     <h2>Random Articles:</h2>
     <RandomArticles />
+    <h2>Children:</h2>
+    <Children />
   </div>,
   document.getElementById('mount')
 )
