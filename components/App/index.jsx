@@ -90,12 +90,12 @@ var RandomArticles = HigherOrderComponent(RandomArticlesDetails)
 ReactDOM.render(
   <div>
     <h2>Employee Basic Details Component:</h2>
-    <EmployeeBasicDetails></EmployeeBasicDetails>
+    <EmployeeBasicDetails />
     <br></br>
     <h2>Employee Salary Details Component:</h2>
-    <EmployeeSalaryDetails></EmployeeSalaryDetails>
+    <EmployeeSalaryDetails />
     <h2>Random Articles:</h2>
-    <RandomArticles></RandomArticles>
+    <RandomArticles />
   </div>,
   document.getElementById('mount')
 )
